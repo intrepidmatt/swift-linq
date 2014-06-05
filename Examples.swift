@@ -30,6 +30,7 @@ var blueMoon = Beer("Blue Moon", true, true)
 var beers = [millerLight, budLight, budweiser, guiness, blueMoon]
 var fillingBeers = SequenceOf(beers).Where({(beer) in !beer.lessFilling})
 
+// Can use for-in to iterate any SequenceOf<T>
 for beer in fillingBeers {
     println(beer.name)
 }
