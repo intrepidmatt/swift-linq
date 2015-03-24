@@ -199,4 +199,9 @@ extension SequenceOf {
         }
         return output;
     }
+    
+    func OrderBy<TKey: Comparable>(f: (T) -> TKey) -> OrderedSequenceOf<T> {
+        var orderedSequence = OrderedSequenceOf(self, ProjectionComparer(f, Comparer<TKey>.defaultComparer()))
+        return orderedSequence
+    }
 }

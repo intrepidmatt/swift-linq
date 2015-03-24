@@ -72,3 +72,25 @@ println(firstTenPrimes)
 var firstFourDigitPrime = primes.SkipUntil({(x) in x >= 1000}).First()
 println(firstFourDigitPrime)
 // 1009
+
+var nums = [1, 3, 2, -8, 25, 25, 3]
+println(nums.OrderBy({$0}).ToArray())
+
+class Person {
+    var firstName: String
+    var lastName: String
+    init(_ firstName: String, _ lastName: String) {
+        self.firstName = firstName
+        self.lastName = lastName
+    }
+}
+
+var people = [Person("Matt", "Bridges"), Person("Jess", "Bridges"), Person("Jake", "Bridges"), Person("Andrea", "Garvey"), Person("Brian", "Garvey")]
+var sortedPeople = people
+    .OrderBy({$0.lastName})
+    .ThenBy({$0.firstName})
+    .Select({$0.lastName + ", " + $0.firstName})
+
+for person in sortedPeople {
+    println(person)
+}

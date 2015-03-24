@@ -37,4 +37,7 @@ extension Array {
     func All(f: (T) -> Bool) -> Bool {
         return SequenceOf(self).All(f)
     }
+    func OrderBy<TKey: Comparable>(f: (T) -> TKey) -> OrderedSequenceOf<T> {
+        return SequenceOf(self).OrderBy(f)
+    }
 }
