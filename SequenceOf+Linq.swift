@@ -110,12 +110,12 @@ extension SequenceOf {
     func SkipWhile(f: (T) -> Bool) -> SequenceOf<T> {
         return SequenceOf<T>({() -> GeneratorOf<T> in
             var generator = self.generate()
-            var conditionMet = false
+            var conditionMet = true
             return GeneratorOf<T>({
-                while !conditionMet {
+                while conditionMet {
                     if let value = generator.next() {
                         if !f(value) {
-                            conditionMet = true
+                            conditionMet = false
                             return value
                         }
                     } else {
