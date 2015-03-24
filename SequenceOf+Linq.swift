@@ -9,8 +9,8 @@ extension SequenceOf {
                 } else {
                     return nil
                 }
-                })
             })
+        })
     }
     
     func Where(f: (T) -> Bool) -> SequenceOf<T> {
@@ -28,8 +28,8 @@ extension SequenceOf {
                         return nil
                     }
                 }
-                })
             })
+        })
     }
     
     func Take(count: Int) -> SequenceOf<T> {
@@ -43,8 +43,8 @@ extension SequenceOf {
                 } else {
                     return nil
                 }
-                })
             })
+        })
     }
     
     func TakeWhile(f: (T) -> Bool) -> SequenceOf<T> {
@@ -64,8 +64,8 @@ extension SequenceOf {
                     }
                 }
                 return nil
-                })
             })
+        })
     }
     
     func TakeUntil(f: (T) -> Bool) -> SequenceOf<T> {
@@ -85,8 +85,8 @@ extension SequenceOf {
                     }
                 }
                 return nil
-                })
             })
+        })
     }
     
     
@@ -103,8 +103,8 @@ extension SequenceOf {
                     }
                 }
                 return generator.next()
-                })
             })
+        })
     }
     
     func SkipWhile(f: (T) -> Bool) -> SequenceOf<T> {
@@ -112,20 +112,19 @@ extension SequenceOf {
             var generator = self.generate()
             var conditionMet = true
             return GeneratorOf<T>({
-                while (conditionMet) {
+                while conditionMet {
                     if let value = generator.next() {
-                        if f(value) {
-                            return value
-                        } else {
+                        if !f(value) {
                             conditionMet = false
+                            return value
                         }
                     } else {
                         return nil
                     }
                 }
-                return nil
-                })
+                return generator.next()
             })
+        })
     }
     
     
@@ -145,8 +144,8 @@ extension SequenceOf {
                     }
                 }
                 return generator.next()
-                })
             })
+        })
     }
     
     func Any(f: (T) -> Bool) -> Bool {
@@ -193,10 +192,10 @@ extension SequenceOf {
         return generator.next()
     }
     
-    func ToArray() -> T[] {
-        var output = T[]()
+    func ToArray() -> [T] {
+        var output: [T] = []
         for value in self {
-            output += value
+            output += [value]
         }
         return output;
     }
